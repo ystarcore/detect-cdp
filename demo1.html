@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+</head>
+<script>
+    console.log(Object.defineProperties(new Error, {
+        message: { get() { (document.getElementById("demo").innerHTML = "Chrom/Fire browser DevTools is open") } },
+        toString: { value() { (new Error).stack.includes('toString@') && (document.getElementById("demo").innerHTML = "Safari browser DevTools is open") } }
+    }));
+</script>
+
+<body>
+
+    <h4 id="demo"></h4>
+
+</body>
+
+</html>

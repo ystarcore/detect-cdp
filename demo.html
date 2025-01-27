@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+</head>
+<script>
+    let workerUrl = 'data:application/javascript;base64,' + btoa(`
+        self.addEventListener('message', (e) => {
+            if (e.data === 'hello') {
+                self.postMessage('hello');
+            }
+            debugger;
+            self.postMessage('');
+        });
+    `);
+
+    function checkIfDebuggerEnabled() {
+        return new Promise((resolve) => {
+            let fulfilled = false;
+            let worker = new Worker(workerUrl);
+
+            worker.onmessage = (e) => {
+                let data = e.data;
+
+                if (data === 'hello')
+                    setTimeout(() => {
+                        if (!fulfilled) {
+                            resolve(true);
+                            worker.terminate();
+                        }
+                    }, 1);
+                else {
+                    fulfilled = true;
+                    resolve(false);
+                    worker.terminate();
+                }
+            };
+            worker.postMessage('hello');
+        });
+    }
+
+    checkIfDebuggerEnabled().then((result) => {
+        if (result)
+            document.getElementById("demo").innerHTML = "browser DevTools is open";
+        else
+            document.getElementById("demo").innerHTML = "browser DevTools is not open, unless you have deactivated breakpoints"
+
+    });
+
+</script>
+
+<body>
+
+    <p id="demo">This is a paragraph.</p>
+
+</body>
+
+</html>
