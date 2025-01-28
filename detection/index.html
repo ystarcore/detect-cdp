@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #demo {
+            text-align: center;
+            font-size: 4rem;
+        }
+    </style>
+</head>
+
+<body>
+    <span id="demo"></span>
+
+    <script>
+        var cdpDetected = false;
+
+        var e = new Error();
+
+        Object.defineProperty(e, 'stack', {
+            get() {
+                cdpDetected = true;
+            }
+        });
+
+        console.log(e);
+
+        if (cdpDetected) {
+            document.getElementById("demo").innerHTML = "Chrome DevTools Protocol";
+            document.getElementById("demo").style.color = "red";
+        }
+        else {
+            document.getElementById("demo").innerHTML = "Normal"
+            document.getElementById("demo").style.color = "green";
+        }
+
+    </script>
+</body>
+
+</html>

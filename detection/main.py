@@ -26,7 +26,7 @@ driver.execute_cdp_cmd(
     },
 )
 
-driver.get("https://www.browserscan.net/bot-detection")
+driver.get("file:///D:/anti-py/index.html")
 
 time.sleep(50)
 

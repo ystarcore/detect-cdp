@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        (function () {
+            const originalConsoleDebug = console.debug;
+
+            // Test if console.debug is overridden
+            function isConsoleDebugOverridden() {
+                return originalConsoleDebug !== console.debug;
+            }
+
+            // Usage
+            if (isConsoleDebugOverridden()) {
+                alert("console.debug has been overridden");
+            } else {
+                alert("console.debug functions normally");
+            }
+        })();
+    </script>
+</body>
+
+</html>
